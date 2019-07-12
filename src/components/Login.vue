@@ -19,7 +19,9 @@
                 label="Password"
                 type="password"
               ></v-text-field>
-              <v-btn @click="submit">submit</v-btn>
+              <v-flex xl4 offset-xl4>
+                <v-btn color="primary" @click="submit">submit</v-btn>
+              </v-flex>
             </v-form>
           </v-flex>
         </v-layout>
@@ -39,11 +41,7 @@ export default {
   },
   methods: {
     submit () {
-      const vm = this
       this.$auth.login(this.login, this.password)
-        .then(() => {
-          vm.$router.push('/')
-        })
     }
   }
 }
@@ -55,6 +53,7 @@ export default {
   letter-spacing: .3rem;
   text-align: center;
   margin-bottom: 2rem;
+  font-family: 'Roboto', sans-serif;
 }
 .align-content-center {
   height: 80%;

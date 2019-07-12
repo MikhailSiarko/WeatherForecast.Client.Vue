@@ -1,7 +1,7 @@
 <template>
   <v-app>
+    <NavigationBar :items="items" />
     <v-content>
-      <NavigationBar :items="items" />
       <router-view></router-view>
     </v-content>
   </v-app>

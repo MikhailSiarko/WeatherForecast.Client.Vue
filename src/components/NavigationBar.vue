@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar app>
+  <v-toolbar dark>
     <v-toolbar-title class="headline text-uppercase">
       <span>Weather</span>
       <span class="font-weight-light">Forecast</span>
@@ -19,7 +19,12 @@
 <script>
 export default {
   name: 'NavigationBar',
-  props: ['items']
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  }
 }
 </script>
 

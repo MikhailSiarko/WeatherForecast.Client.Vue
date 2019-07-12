@@ -8,16 +8,17 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(requestConfig => {
   const token = sessionStorage.getItem('token')
-  if(token) {
+  if (token) {
     requestConfig.headers.common['Authorization'] = 'Bearer ' + token
   }
   return requestConfig
 }, handleError)
 
-axiosInstance.interceptors.response.use(response => response, handleError)
-
 function handleError (error) {
   return Promise.reject(error)
 }
 
-export default axiosInstance;
+export {
+  axiosInstance,
+  handleError
+}
