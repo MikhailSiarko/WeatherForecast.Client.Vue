@@ -28,6 +28,13 @@ class AuthenticationService {
     sessionStorage.removeItem('user')
     router.push('/')
   }
+  isAuthenticated () {
+    if (sessionStorage.getItem('token')) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
 
 function setAuthData (response) {

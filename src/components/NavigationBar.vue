@@ -9,6 +9,7 @@
       v-for="item in items"
       flat
       :to="item.path"
+      @click.prevent="item.action"
       :key="item.path"
     >
       {{ item.name }}
