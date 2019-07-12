@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'Sidebar',
+  name: 'NavigationBar',
   props: ['items']
 }
 </script>

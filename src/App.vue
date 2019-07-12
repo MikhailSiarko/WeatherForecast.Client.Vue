@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <Sidebar :items="items" />
+      <NavigationBar :items="items" />
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -9,12 +9,12 @@
 
 <script>
 
-import Sidebar from '@/components/Sidebar'
+import NavigationBar from '@/components/NavigationBar'
 
 export default {
   name: 'App',
   components: {
-    Sidebar
+    NavigationBar
   },
   data () {
     return {
