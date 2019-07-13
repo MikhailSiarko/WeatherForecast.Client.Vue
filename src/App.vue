@@ -2,7 +2,7 @@
   <v-app>
     <NavigationBar :items="items" />
     <v-content>
-      <router-view></router-view>
+      <router-view @authenticated="setAuthentication($event)"></router-view>
     </v-content>
   </v-app>
 </template>
@@ -10,6 +10,7 @@
 <script>
 
 import NavigationBar from '@/components/NavigationBar'
+import Vue from 'vue'
 
 export default {
   name: 'App',
@@ -18,7 +19,27 @@ export default {
   },
   data () {
     return {
-      items: [
+      authenticated: Vue.$isAuthenticated()
+    }
+  },
+  methods: {
+    setAuthentication (event) {
+      this.authenticated = event
+    }
+  },
+  computed: {
+    items () {
+      const that = this
+      return this.authenticated ? [
+        {
+          name: 'Logout',
+          action () {
+            that.$auth.logout()
+            that.setAuthentication(false)
+            that.$router.push('/login')
+          }
+        }
+      ] : [
         { path: '/login', name: 'Login' },
         { path: '/register', name: 'Register' }
       ]

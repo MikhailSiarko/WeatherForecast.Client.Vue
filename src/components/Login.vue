@@ -8,7 +8,7 @@
           </v-flex>
         </v-layout>
         <v-layout row>
-          <v-flex xs10 sm8 md2 lg2 xl2 offset-xs1 offset-sm2 offset-md5 offset-lg5 offset-xl5>
+          <v-flex xs10 sm8 md4 lg4 xl4 offset-xs1 offset-sm2 offset-md4 offset-lg4 offset-xl4>
             <v-form ref="form">
               <v-text-field
                 v-model="login"
@@ -19,7 +19,7 @@
                 label="Password"
                 type="password"
               ></v-text-field>
-              <v-flex xl4 offset-xl4>
+              <v-flex xs4 sm4 md4 lg4 xl4 offset-xl4 offset-xs4 offset-sm4 offset-md4 offset-lg4>
                 <v-btn color="primary" @click="submit">submit</v-btn>
               </v-flex>
             </v-form>
@@ -41,7 +41,14 @@ export default {
   },
   methods: {
     submit () {
+      const that = this
       this.$auth.login(this.login, this.password)
+        .then(response => {
+          if (response.data.token) {
+            that.$emit('authenticated', true)
+            this.$router.push('/')
+          }
+        })
     }
   }
 }
