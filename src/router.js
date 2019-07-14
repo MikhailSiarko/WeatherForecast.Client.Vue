@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Register from '@/components/Register'
-import Forecast from '@/components/Forecast'
+import Login from './components/Login'
+import Register from './components/Register'
+import Forecast from './components/Forecast'
 
 Vue.use(Router)
 

@@ -9,7 +9,7 @@
         </v-layout>
         <v-layout row>
           <v-flex xs10 sm8 md4 lg4 xl4 offset-xs1 offset-sm2 offset-md4 offset-lg4 offset-xl4>
-            <v-form ref="form">
+            <v-form @submit.prevent="submit">
               <v-text-field
                 v-model="login"
                 label="Login"
@@ -20,7 +20,7 @@
                 type="password"
               ></v-text-field>
               <v-flex xs4 sm4 md4 lg4 xl4 offset-xl4 offset-xs4 offset-sm4 offset-md4 offset-lg4>
-                <v-btn color="primary" @click="submit">submit</v-btn>
+                <v-btn color="primary" type="submit">submit</v-btn>
               </v-flex>
             </v-form>
           </v-flex>

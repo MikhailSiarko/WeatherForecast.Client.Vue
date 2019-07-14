@@ -1,17 +1,7 @@
-import { axiosInstance, handleError } from '../config/axios'
+import { axiosInstance } from '../config/axios'
 import apiUrls from '../config/apiUrls'
 
 class AuthenticationService {
-  constructor () {
-    const that = this
-    axiosInstance.interceptors.response.use(response => {
-      if (response.status === 401) {
-        that.logout()
-      }
-      return response
-    }, handleError)
-  }
-
   login (login, password) {
     return axiosInstance.post(apiUrls.LOGIN, { login, password })
       .then(setAuthData)

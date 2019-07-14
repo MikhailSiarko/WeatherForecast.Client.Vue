@@ -9,7 +9,7 @@
 
 <script>
 
-import NavigationBar from '@/components/NavigationBar'
+import NavigationBar from './components/NavigationBar'
 import Vue from 'vue'
 
 export default {
