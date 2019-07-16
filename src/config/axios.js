@@ -14,7 +14,10 @@ axiosInstance.interceptors.request.use(requestConfig => {
   return requestConfig
 }, handleError)
 
+axiosInstance.interceptors.response.use(response => response, handleError)
+
 function handleError (error) {
+  alert(error.response.data.ErrorMessage)
   return Promise.reject(error)
 }
 

@@ -7,7 +7,7 @@ class AuthenticationService {
       .then(setAuthData)
   }
   register (login, password, confirmPassword) {
-    return axiosInstance.post(apiUrls.LOGIN, { login, password, confirmPassword })
+    return axiosInstance.post(apiUrls.REGISTER, { login, password, confirmPassword })
       .then(setAuthData)
   }
   logout () {

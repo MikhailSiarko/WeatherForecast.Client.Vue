@@ -12,14 +12,17 @@
             <v-form @submit.prevent="submit">
               <v-text-field
                 v-model="login"
+                :rules="[rules.required]"
                 label="Login"
               ></v-text-field>
               <v-text-field
                 v-model="password"
                 label="Password"
                 type="password"
+                :rules="[rules.required]"
               ></v-text-field>
               <v-text-field
+                :rules="[rules.required, rules.matchTo(password)]"
                 v-model="confirmPassword"
                 label="Confirm Password"
                 type="password"
@@ -42,7 +45,13 @@ export default {
     return {
       login: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      rules: {
+        required: value => !!value || 'Required',
+        matchTo: match => {
+          return value => match === value || 'Values do not match!'
+        }
+      }
     }
   },
   methods: {
@@ -66,7 +75,6 @@ export default {
     letter-spacing: .3rem;
     text-align: center;
     margin-bottom: 2rem;
-    font-family: 'Roboto', sans-serif;
   }
   .align-content-center {
     height: 80%;
