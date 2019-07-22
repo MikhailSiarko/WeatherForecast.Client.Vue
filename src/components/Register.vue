@@ -57,7 +57,7 @@ export default {
   methods: {
     submit () {
       const that = this
-      this.$auth.register(this.login, this.password, this.constructor)
+      this.$auth.register(this.login, this.password, this.confirmPassword)
         .then(response => {
           if (response.data.token) {
             that.$emit('authenticated', true)
