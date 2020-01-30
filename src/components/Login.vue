@@ -8,8 +8,8 @@
           </v-flex>
         </v-layout>
         <v-layout row>
-          <v-flex xs10 sm8 md2 lg2 xl2 offset-xs1 offset-sm2 offset-md5 offset-lg5 offset-xl5>
-            <v-form ref="form">
+          <v-flex xs10 sm8 md4 lg4 xl4 offset-xs1 offset-sm2 offset-md4 offset-lg4 offset-xl4>
+            <v-form @submit.prevent="submit">
               <v-text-field
                 v-model="login"
                 label="Login"
@@ -19,7 +19,9 @@
                 label="Password"
                 type="password"
               ></v-text-field>
-              <v-btn @click="submit">submit</v-btn>
+              <v-flex xs4 sm4 md4 lg4 xl4 offset-xl4 offset-xs4 offset-sm4 offset-md4 offset-lg4>
+                <v-btn color="primary" type="submit">submit</v-btn>
+              </v-flex>
             </v-form>
           </v-flex>
         </v-layout>
@@ -39,10 +41,13 @@ export default {
   },
   methods: {
     submit () {
-      const vm = this
+      const that = this
       this.$auth.login(this.login, this.password)
-        .then(() => {
-          vm.$router.push('/')
+        .then(response => {
+          if (response.data.token) {
+            that.$emit('authenticated', true)
+            this.$router.push('/')
+          }
         })
     }
   }
@@ -55,6 +60,7 @@ export default {
   letter-spacing: .3rem;
   text-align: center;
   margin-bottom: 2rem;
+  font-family: 'Roboto', sans-serif;
 }
 .align-content-center {
   height: 80%;

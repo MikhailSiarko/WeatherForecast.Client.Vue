@@ -1,8 +1,11 @@
 import Vue from 'vue'
-import authenticationService from '../services/authenticationService'
+import AuthenticationService from '../services/authenticationService'
+
+const service = new AuthenticationService()
 
 Vue.use({
   install (Vue) {
-    Vue.prototype.$auth = authenticationService
+    Vue.prototype.$auth = service
+    Vue.$isAuthenticated = service.isAuthenticated
   }
 })

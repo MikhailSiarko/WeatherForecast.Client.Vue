@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(requestConfig => {
   const token = sessionStorage.getItem('token')
-  if(token) {
+  if (token) {
     requestConfig.headers.common['Authorization'] = 'Bearer ' + token
   }
   return requestConfig
@@ -17,7 +17,11 @@ axiosInstance.interceptors.request.use(requestConfig => {
 axiosInstance.interceptors.response.use(response => response, handleError)
 
 function handleError (error) {
+  alert(error.response.data.errorMessage)
   return Promise.reject(error)
 }
 
-export default axiosInstance;
+export {
+  axiosInstance,
+  handleError
+}

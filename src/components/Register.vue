@@ -8,23 +8,28 @@
           </v-flex>
         </v-layout>
         <v-layout row>
-          <v-flex xs10 sm8 md2 lg2 xl2 offset-xs1 offset-sm2 offset-md5 offset-lg5 offset-xl5>
-            <v-form ref="form">
+          <v-flex xs10 sm8 md4 lg4 xl4 offset-xs1 offset-sm2 offset-md4 offset-lg4 offset-xl4>
+            <v-form @submit.prevent="submit">
               <v-text-field
                 v-model="login"
+                :rules="[rules.required]"
                 label="Login"
               ></v-text-field>
               <v-text-field
                 v-model="password"
                 label="Password"
                 type="password"
+                :rules="[rules.required]"
               ></v-text-field>
               <v-text-field
+                :rules="[rules.required, rules.matchTo(password)]"
                 v-model="confirmPassword"
                 label="Confirm Password"
                 type="password"
               ></v-text-field>
-              <v-btn @click="submit">submit</v-btn>
+              <v-flex xs4 sm4 md4 lg4 xl4 offset-xl4 offset-xs4 offset-sm4 offset-md4 offset-lg4>
+                <v-btn color="primary" type="submit">submit</v-btn>
+              </v-flex>
             </v-form>
           </v-flex>
         </v-layout>
@@ -40,16 +45,24 @@ export default {
     return {
       login: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      rules: {
+        required: value => !!value || 'Required',
+        matchTo: match => {
+          return value => match === value || 'Values do not match!'
+        }
+      }
     }
   },
   methods: {
     submit () {
-      const vm = this
-      this.$auth.register(this.login, this.password)
-        .then(json => {
-          console.dir(json)
-          vm.$router.push('/')
+      const that = this
+      this.$auth.register(this.login, this.password, this.confirmPassword)
+        .then(response => {
+          if (response.data.token) {
+            that.$emit('authenticated', true)
+            this.$router.push('/')
+          }
         })
     }
   }
